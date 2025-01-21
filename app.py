@@ -1,5 +1,5 @@
 from fastapi import FastAPI,File, UploadFile , Response
-from fastapi.responses import FileResponse
+from fastapi.responses import FileResponse , HTMLResponse
 import numpy as np 
 from PIL import Image, ImageDraw, ImageFont
 import torch
@@ -40,10 +40,19 @@ def draw_bounding_boxes(image: Image.Image, predict_bbox: pd.DataFrame):
 
     return image
 
-
-@app.get('/')
-async def index() -> str:
-    return 'Traffic System With Yolov5 '
+@app.get("/")
+async def home():
+    return HTMLResponse(content="""
+        <html>
+        <body>
+        <h2>Traffic System With Yolov5</h2>
+        <form action="/predict/" method="post" enctype="multipart/form-data">
+            <input type="file" name="file">
+            <input type="submit" value="Upload">
+        </form>
+        </body>
+        </html>
+    """)
 
 
 @app.post("/predict/")
@@ -60,9 +69,6 @@ async def predict(file: UploadFile):
 
     # return {"detections": pred_json}
     return Response(content=img_byte_array, media_type="image/jpeg")
-
-
-
 
 
 

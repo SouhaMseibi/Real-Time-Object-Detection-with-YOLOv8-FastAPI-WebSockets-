@@ -2,7 +2,7 @@ import requests
 from PIL import Image
 import io
 
-image_path = "/home/souha/traffic/img.jpg"
+image_path = "/home/souha/traffic/img_test/img.jpg"
 url = "http://127.0.0.1:8000/predict/"
 
 with open(image_path, "rb") as img:
