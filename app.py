@@ -9,8 +9,8 @@ import pandas as pd
 
 app = FastAPI()
 
-model = torch.hub.load('ultralytics/yolov5', 'custom', path='/home/souha/traffic/best.pt', force_reload=True)
-# model = YOLO("yolov8n.pt")
+# model = torch.hub.load('ultralytics/yolov5', 'custom', path='/home/souha/traffic/best.pt', force_reload=True)
+model = YOLO("yolov8n.pt")
 
 def get_bytes_from_image(image: Image) -> bytes:
     return_image = io.BytesIO()
