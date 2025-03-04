@@ -1,4 +1,5 @@
 import asyncio
+import os
 from fastapi import APIRouter, Response, WebSocket , WebSocketDisconnect
 from backend.utilities.processing import get_bytes_from_image, transform_predict_to_df, draw_bounding_boxes
 from backend.models.yolo_model import run_yolo
@@ -6,19 +7,14 @@ from backend.utilities.camera_class import Camera
 
 router = APIRouter()
 
-# Usage example: Streaming default camera for local webcam
-# Usage example 1 : Streaming from usb camera : check cd /dev and enter the url example : '/dev/video0'
-# Usage example 3: Streaming an IP camera:
-    # camera = Camera('rtsp://user:password@ip_address:port/')
-
-
-camera = Camera('/dev/video0')  
-
+# camera = Camera('/dev/video0')  
 
 
 @router.get("/snapshot")
 async def snapshot():
     """Captures a single YOLO-processed frame and returns it."""
+    CAMERA_URL = os.getenv("CAMERA_URL")
+    camera = Camera(CAMERA_URL)  
     frame = camera.get_frame()
     if frame:
         return Response(content=frame, media_type="image/jpeg")
@@ -28,6 +24,8 @@ async def snapshot():
 @router.websocket("/video")
 async def video_stream(websocket: WebSocket):
     """WebSocket endpoint that streams YOLO-processed frames."""
+    CAMERA_URL = os.getenv("CAMERA_URL")
+    camera = Camera(CAMERA_URL)  
     await websocket.accept()
     try:
         while True:
