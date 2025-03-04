@@ -5,7 +5,16 @@ from backend.models.yolo_model import run_yolo
 from backend.utilities.camera_class import Camera
 
 router = APIRouter()
-camera = Camera()  
+
+# Usage example: Streaming default camera for local webcam
+# Usage example 1 : Streaming from usb camera : check cd /dev and enter the url example : '/dev/video0'
+# Usage example 3: Streaming an IP camera:
+    # camera = Camera('rtsp://user:password@ip_address:port/')
+
+
+camera = Camera('/dev/video0')  
+
+
 
 @router.get("/snapshot")
 async def snapshot():

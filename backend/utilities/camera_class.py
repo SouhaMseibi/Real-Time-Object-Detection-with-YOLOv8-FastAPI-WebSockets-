@@ -14,7 +14,7 @@ from backend.utilities.processing import process_with_yolo , get_bytes_from_imag
 class Camera:
     """ Handles video capture from the camera. """
 
-    def __init__(self, url: Optional[Union[str, int]] = '/dev/video0') -> None:
+    def __init__(self, url: Optional[Union[str, int]] = 0) -> None:
         self.cap = cv2.VideoCapture(url)
         self.lock = threading.Lock()
 
