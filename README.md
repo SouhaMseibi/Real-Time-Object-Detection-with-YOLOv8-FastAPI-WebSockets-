@@ -5,6 +5,8 @@ This project provides **real-time object detection** using **YOLOv8** with **Fas
 - **Capturing snapshots from local camera**.
 - **Live video streaming from local camera**.
 
+![Image](https://github.com/user-attachments/assets/39aba110-99c4-49e6-86f6-e20c0fcf361c)
+
 ### Set up the camera based on your source:
 #### Default Local Webcam
 ```bash
