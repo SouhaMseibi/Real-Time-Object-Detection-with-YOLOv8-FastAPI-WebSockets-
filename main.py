@@ -10,7 +10,7 @@ from starlette.requests import Request
 
 
 app = FastAPI()
-# CAMERA_URL = os.getenv("CAMERA_URL", "0")
+
 
 app.mount("/static", StaticFiles(directory="static"), name="static")
 

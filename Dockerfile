@@ -14,3 +14,4 @@ EXPOSE 8000
 
 
 CMD ["python3", "main.py" , "-c /dev/video0" ]
+# CMD ["fastapi" , " run" , "main.py"]

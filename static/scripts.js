@@ -37,8 +37,7 @@ async function takeSnapshot() {
     }
 }
 
-let ws;  // WebSocket variable
-
+let ws;  
 function startStream() {
     let imgElement = document.getElementById("video-stream");
     imgElement.style.display = "block";
@@ -48,7 +47,7 @@ function startStream() {
     }
 
     ws = new WebSocket("ws://" + window.location.host + "/video");
-    ws.binaryType = "blob";  // Receive images as binary
+    ws.binaryType = "blob";  
 
     ws.onmessage = function(event) {
         let imageBlob = event.data;

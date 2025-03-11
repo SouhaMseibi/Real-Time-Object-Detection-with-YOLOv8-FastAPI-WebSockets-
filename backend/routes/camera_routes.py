@@ -12,7 +12,7 @@ router = APIRouter()
 
 @router.get("/snapshot")
 async def snapshot():
-    """Captures a single YOLO-processed frame and returns it."""
+   
     CAMERA_URL = os.getenv("CAMERA_URL")
     camera = Camera(CAMERA_URL)  
     frame = camera.get_frame()
@@ -23,7 +23,7 @@ async def snapshot():
 
 @router.websocket("/video")
 async def video_stream(websocket: WebSocket):
-    """WebSocket endpoint that streams YOLO-processed frames."""
+   
     CAMERA_URL = os.getenv("CAMERA_URL")
     camera = Camera(CAMERA_URL)  
     await websocket.accept()
@@ -33,6 +33,7 @@ async def video_stream(websocket: WebSocket):
             if frame:
                 await websocket.send_bytes(frame)
             await asyncio.sleep(0.1)  # Control the frame rate
+            
     except WebSocketDisconnect:
         print("WebSocket connection closed by client.")
     except Exception as e:
